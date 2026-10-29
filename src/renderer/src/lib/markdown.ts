@@ -169,7 +169,7 @@ md.renderer.rules.fence = (tokens, idx, _opts, env) => {
   }
   return (
     `<div class="code-block" data-line="${line}"><div class="code-head"><span class="code-lang">${esc(lang)}</span>` +
-    `<button class="code-copy" type="button">Copia</button></div><pre><code class="hljs">${body}</code></pre></div>`
+    `<button class="code-copy" type="button">Copy</button></div><pre><code class="hljs">${body}</code></pre></div>`
   )
 }
 

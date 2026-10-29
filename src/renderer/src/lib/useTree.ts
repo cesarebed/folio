@@ -32,7 +32,7 @@ export function useTree(root: string, showHidden: boolean, expanded: string[]): 
         if (gen !== generation.current) return
         const msg = String((err as Error).message ?? err)
         setChildren((c) => ({ ...c, [dir]: [] }))
-        setErrors((e) => ({ ...e, [dir]: /EPERM|EACCES/.test(msg) ? 'Accesso negato' : 'Cartella non disponibile' }))
+        setErrors((e) => ({ ...e, [dir]: /EPERM|EACCES/.test(msg) ? 'Permission denied' : 'Folder unavailable' }))
       } finally {
         inflight.current.delete(dir)
       }

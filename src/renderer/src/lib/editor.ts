@@ -99,7 +99,7 @@ export function createState(doc: string, onChange: (doc: string) => void) {
       search({ top: true }),
       EditorView.lineWrapping,
       EditorState.allowMultipleSelections.of(true),
-      placeholder('Inizia a scrivere…'),
+      placeholder('Start writing…'),
       yamlFrontmatter({ content: markdown({ base: markdownLanguage, codeLanguages: languages, addKeymap: true }) }),
       syntaxHighlighting(highlight),
       theme,

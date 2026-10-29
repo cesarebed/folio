@@ -1,98 +1,97 @@
 <p align="center">
-  <img src="build/icon.png" width="112" alt="Icona di Folio">
+  <img src="build/icon.png" width="112" alt="Folio icon">
 </p>
 
 <h1 align="center">Folio</h1>
 
 <p align="center">
-  Lettore ed editor Markdown per macOS, con albero delle cartelle e tab multiple.<br>
-  <em>A Markdown reader and editor for macOS with a folder tree and tabs. The interface is in Italian.</em>
+  A Markdown reader and editor for macOS, with a folder tree and tabs.
 </p>
 
-![Folio in modalità lettura](docs/screenshots/lettura.png)
+![Folio in reading mode](docs/screenshots/reading.png)
 
-Folio apre i file Markdown che hai già sul Mac, ovunque si trovino. Non c'è un archivio da importare né un database: navighi le cartelle dalla barra laterale, apri più documenti nelle tab, li leggi formattati e li modifichi con salvataggio automatico. L'idea è quella di Obsidian, ridotta a leggere e scrivere file.
+Folio opens the Markdown files you already have on your Mac, wherever they live. There is no vault to import and no database: you browse folders from the sidebar, open several documents in tabs, read them nicely formatted and edit them with autosave. Think of Obsidian, cut down to reading and writing files.
 
-## Funzioni
+## Features
 
-**Navigazione**
-- Barra laterale con posizioni rapide (Inizio, Scrivania, Documenti, Download, iCloud Drive), cartelle preferite e la freccia per risalire fino alla radice del disco
-- Albero che mostra solo cartelle e file Markdown e si aggiorna quando cambi qualcosa dal Finder
-- Rinomina, sposta con il trascinamento, crea note e cartelle, sposta nel Cestino
-- Tab riordinabili, cronologia avanti/indietro per ogni tab, sessione ripristinata alla riapertura
+**Navigation**
+- Sidebar with quick locations (Home, Desktop, Documents, Downloads, iCloud Drive), favorite folders and an arrow to climb all the way up to the root of the disk
+- A tree that shows only folders and Markdown files and updates when you change things in Finder
+- Rename, move by dragging, create notes and folders, move to Trash
+- Reorderable tabs, back/forward history per tab, session restored on relaunch
 
-**Lettura e scrittura**
-- Modalità lettura e modalità modifica (⌘E), con la stessa tipografia e la posizione mantenuta
-- Salvataggio automatico; i file modificati da altre app vengono ricaricati
-- Indice dei titoli laterale e ricerca nel documento
+**Reading and writing**
+- Read mode and edit mode (⌘E), with the same typography and the scroll position kept
+- Autosave; files changed by other apps are reloaded
+- Outline of headings and find in document
 
-**Formattazione**
-- Codice evidenziato con pulsante di copia, tabelle, note a piè di pagina
-- Formule con KaTeX (`$…$` e `$$…$$`) e diagrammi Mermaid
-- Liste di attività spuntabili direttamente in lettura
-- Callout in stile Obsidian (`> [!tip]`), collegamenti `[[nota]]`, immagini locali
-- Front matter YAML mostrato come tabella di proprietà
-- Supporto ai pacchetti `.textbundle`
+**Formatting**
+- Highlighted code with a copy button, tables, footnotes
+- Math with KaTeX (`$…$` and `$$…$$`) and Mermaid diagrams
+- Task lists you can tick directly in read mode
+- Obsidian-style callouts (`> [!tip]`), `[[note]]` links, local images
+- YAML front matter shown as a properties table
+- `.textbundle` packages
 
-**Ricerca**
-- ⌘P cerca per nome tra tutti i file Markdown del Mac tramite Spotlight
-- ⌘⇧F cerca nel contenuto dei file della cartella aperta
+**Search**
+- ⌘P finds any Markdown file on your Mac by name, through Spotlight
+- ⌘⇧F searches the contents of the files in the open folder
 
-**Aspetto**
-- Tema chiaro, scuro o di sistema; carattere di lettura serif o sans; dimensione e larghezza della pagina regolabili
+**Appearance**
+- Light, dark or system theme; serif or sans reading font; adjustable text size and page width
 
-| Modifica, tema scuro | Apertura rapida |
+| Editing, dark theme | Quick open |
 | --- | --- |
-| ![Modalità modifica con tema scuro](docs/screenshots/modifica-scuro.png) | ![Apertura rapida](docs/screenshots/apertura-rapida.png) |
+| ![Edit mode with the dark theme](docs/screenshots/editing-dark.png) | ![Quick open](docs/screenshots/quick-open.png) |
 
-## Installazione
+## Installation
 
-Scarica `Folio-<versione>-arm64.zip` dalla pagina [Releases](https://github.com/cesarebed/folio/releases), estrai e trascina `Folio.app` in Applicazioni.
+Download `Folio-<version>-arm64.zip` from the [Releases](https://github.com/cesarebed/folio/releases) page, unzip it and drag `Folio.app` into Applications.
 
-L'app non è firmata con un certificato Apple Developer, quindi al primo avvio macOS la blocca. Per sbloccarla, da Terminale:
+The app is not signed with an Apple Developer certificate, so macOS blocks it the first time you open it. To unblock it, run this in Terminal:
 
 ```sh
 xattr -dr com.apple.quarantine /Applications/Folio.app
 ```
 
-La build pubblicata è per Mac con Apple Silicon. Per un Mac Intel compila dai sorgenti.
+The published build is for Apple Silicon Macs. On an Intel Mac, build from source.
 
-## Scorciatoie
+## Shortcuts
 
-| Azione | Tasti |
+| Action | Keys |
 | --- | --- |
-| Apertura rapida | ⌘P |
-| Nuova nota / nuova tab | ⌘N / ⌘T |
-| Lettura ↔ Modifica | ⌘E |
-| Cerca nel documento / nei file | ⌘F / ⌘⇧F |
-| Chiudi tab / riapri tab chiusa | ⌘W / ⌘⇧T |
-| Tab successiva / precedente | ⌃Tab / ⌃⇧Tab |
-| Vai alla tab 1–9 | ⌘1 … ⌘9 |
-| Indietro / Avanti | ⌘[ / ⌘] |
-| Barra laterale / Indice | ⌘\ / ⌘⇧\ |
-| Grassetto, corsivo, link (in modifica) | ⌘B, ⌘I, ⌘K |
-| Testo più grande / più piccolo | ⌘= / ⌘- |
+| Quick open | ⌘P |
+| New note / new tab | ⌘N / ⌘T |
+| Read ↔ Edit | ⌘E |
+| Find in document / in files | ⌘F / ⌘⇧F |
+| Close tab / reopen closed tab | ⌘W / ⌘⇧T |
+| Next / previous tab | ⌃Tab / ⌃⇧Tab |
+| Go to tab 1–9 | ⌘1 … ⌘9 |
+| Back / Forward | ⌘[ / ⌘] |
+| Sidebar / Outline | ⌘\ / ⌘⇧\ |
+| Bold, italic, link (while editing) | ⌘B, ⌘I, ⌘K |
+| Larger / smaller text | ⌘= / ⌘- |
 
-Con ⌘+clic su un file o su un link lo apri in una nuova tab.
+⌘-click a file or a link to open it in a new tab.
 
-## Sviluppo
+## Development
 
-Serve Node.js 22 o successivo.
+Requires Node.js 22 or later.
 
 ```sh
 npm install
-npx electron-vite dev   # avvia in sviluppo
-npm run typecheck       # controllo dei tipi
-npm run dist            # crea release/mac-arm64/Folio.app con firma ad-hoc
+npx electron-vite dev   # run in development
+npm run typecheck       # type check
+npm run dist            # build release/mac-arm64/Folio.app with an ad-hoc signature
 ```
 
-La cartella `docs/demo` contiene alcune note di esempio da aprire con Folio.
+The `docs/demo` folder has a few sample notes to open with Folio.
 
-**Struttura**
-- `src/main` — processo principale Electron: file system, Spotlight, watcher, menu
-- `src/preload` — ponte IPC verso l'interfaccia
-- `src/renderer` — interfaccia React: albero, tab, lettore (markdown-it) ed editor (CodeMirror 6)
+**Layout**
+- `src/main` — Electron main process: file system, Spotlight, watchers, menu
+- `src/preload` — IPC bridge to the UI
+- `src/renderer` — React UI: tree, tabs, reader (markdown-it) and editor (CodeMirror 6)
 
-## Licenza
+## License
 
 [MIT](LICENSE)

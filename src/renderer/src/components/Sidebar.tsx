@@ -119,26 +119,26 @@ export function Sidebar(props: Props) {
     const pinned = settings.pinned.includes(path)
     const items: MenuItemSpec[] = isDir
       ? [
-          { id: 'new-note', label: 'Nuova nota' },
-          { id: 'new-folder', label: 'Nuova cartella' },
+          { id: 'new-note', label: 'New Note' },
+          { id: 'new-folder', label: 'New Folder' },
           { type: 'separator' },
-          ...(entry ? [{ id: 'set-root', label: 'Apri come radice' }] : []),
-          { id: 'pin', label: pinned ? 'Rimuovi dai preferiti' : 'Aggiungi ai preferiti' },
+          ...(entry ? [{ id: 'set-root', label: 'Open as Root' }] : []),
+          { id: 'pin', label: pinned ? 'Remove from Favorites' : 'Add to Favorites' },
           { type: 'separator' },
-          ...(entry ? [{ id: 'rename', label: 'Rinomina…' }] : []),
-          { id: 'reveal', label: 'Mostra nel Finder' },
-          { id: 'copy', label: 'Copia percorso' },
-          ...(entry ? [{ type: 'separator' as const }, { id: 'trash', label: 'Sposta nel Cestino' }] : [])
+          ...(entry ? [{ id: 'rename', label: 'Rename…' }] : []),
+          { id: 'reveal', label: 'Reveal in Finder' },
+          { id: 'copy', label: 'Copy Path' },
+          ...(entry ? [{ type: 'separator' as const }, { id: 'trash', label: 'Move to Trash' }] : [])
         ]
       : [
-          { id: 'open-tab', label: 'Apri in nuova tab' },
+          { id: 'open-tab', label: 'Open in New Tab' },
           { type: 'separator' },
-          { id: 'rename', label: 'Rinomina…' },
-          { id: 'reveal', label: 'Mostra nel Finder' },
-          { id: 'open-default', label: 'Apri con app predefinita' },
-          { id: 'copy', label: 'Copia percorso' },
+          { id: 'rename', label: 'Rename…' },
+          { id: 'reveal', label: 'Reveal in Finder' },
+          { id: 'open-default', label: 'Open with Default App' },
+          { id: 'copy', label: 'Copy Path' },
           { type: 'separator' },
-          { id: 'trash', label: 'Sposta nel Cestino' }
+          { id: 'trash', label: 'Move to Trash' }
         ]
     const choice = await window.api.popupMenu(items)
     switch (choice) {
@@ -172,8 +172,8 @@ export function Sidebar(props: Props) {
   const pinMenu = async (e: React.MouseEvent, path: string) => {
     e.preventDefault()
     const choice = await window.api.popupMenu([
-      { id: 'reveal', label: 'Mostra nel Finder' },
-      { id: 'unpin', label: 'Rimuovi dai preferiti' }
+      { id: 'reveal', label: 'Reveal in Finder' },
+      { id: 'unpin', label: 'Remove from Favorites' }
     ])
     if (choice === 'unpin') patchSettings((s) => ({ pinned: s.pinned.filter((p) => p !== path) }))
     if (choice === 'reveal') window.api.reveal(path)
@@ -204,15 +204,15 @@ export function Sidebar(props: Props) {
     <aside className="sidebar">
       <div className="sidebar-top">
         <div className="segmented small">
-          <button className={props.view === 'files' ? 'on' : ''} onClick={() => props.setView('files')} title="File">
+          <button className={props.view === 'files' ? 'on' : ''} onClick={() => props.setView('files')} title="Files">
             <TreeStructure size={15} weight="bold" />
           </button>
-          <button className={props.view === 'search' ? 'on' : ''} onClick={() => props.setView('search')} title="Cerca nei file (⌘⇧F)">
+          <button className={props.view === 'search' ? 'on' : ''} onClick={() => props.setView('search')} title="Search in files (⌘⇧F)">
             <MagnifyingGlass size={15} weight="bold" />
           </button>
         </div>
         <div className="spacer" />
-        <button className="icon-btn" onClick={() => props.onNewNote()} title="Nuova nota (⌘N)">
+        <button className="icon-btn" onClick={() => props.onNewNote()} title="New note (⌘N)">
           <NotePencil size={16} weight="bold" />
         </button>
         <button
@@ -221,7 +221,7 @@ export function Sidebar(props: Props) {
             const created = await props.onNewFolder(props.selectedDir ?? root)
             if (created) setRenaming(created)
           }}
-          title="Nuova cartella"
+          title="New folder"
         >
           <FolderSimplePlus size={16} weight="bold" />
         </button>
@@ -234,7 +234,7 @@ export function Sidebar(props: Props) {
           <section className="places">
             <button className="section-label" onClick={() => setLocationsOpen((o) => !o)}>
               <CaretRight size={10} weight="bold" className={`chev${locationsOpen ? ' open' : ''}`} />
-              Posizioni
+              Locations
             </button>
             {locationsOpen &&
               places.map((pl) => {
@@ -255,13 +255,13 @@ export function Sidebar(props: Props) {
             {locationsOpen && (
               <button className="place muted" onClick={props.onOpenFolder}>
                 <FolderOpen size={15} />
-                <span>Apri cartella…</span>
+                <span>Open folder…</span>
               </button>
             )}
           </section>
 
           <div className="tree-head" onContextMenu={(e) => contextMenu(e, null)}>
-            <button className="icon-btn" disabled={root === '/'} onClick={() => setRoot(dirname(root))} title="Cartella superiore">
+            <button className="icon-btn" disabled={root === '/'} onClick={() => setRoot(dirname(root))} title="Parent folder">
               <ArrowUp size={14} weight="bold" />
             </button>
             <span className="tree-root" title={tildify(root)}>
@@ -270,7 +270,7 @@ export function Sidebar(props: Props) {
             <button
               className="icon-btn"
               onClick={() => patchSettings((s) => ({ expanded: s.expanded.filter((p) => !isUnder(p, root)) }))}
-              title="Comprimi tutto"
+              title="Collapse all"
             >
               <ArrowsInLineVertical size={14} weight="bold" />
             </button>
@@ -297,8 +297,8 @@ export function Sidebar(props: Props) {
               }
             }}
           >
-            {!tree.isLoaded(root) && <div className="tree-note">Caricamento…</div>}
-            {tree.isLoaded(root) && !rows.length && <div className="tree-note">Nessun file Markdown qui</div>}
+            {!tree.isLoaded(root) && <div className="tree-note">Loading…</div>}
+            {tree.isLoaded(root) && !rows.length && <div className="tree-note">No Markdown files here</div>}
             {rows.map((r, i) => {
               if ('loading' in r)
                 return (
@@ -390,7 +390,7 @@ export function Sidebar(props: Props) {
       )}
 
       <div className="sidebar-bottom">
-        <button className="icon-btn" onClick={() => setShowSettings((s) => !s)} title="Impostazioni">
+        <button className="icon-btn" onClick={() => setShowSettings((s) => !s)} title="Settings">
           <GearSix size={16} weight="bold" />
         </button>
         <span className="sidebar-path" title={root}>

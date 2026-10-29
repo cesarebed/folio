@@ -87,10 +87,10 @@ export const Reader = forwardRef<ReaderHandle, Props>(function Reader(props, ref
     if (copy) {
       const code = copy.closest('.code-block')?.querySelector('code')?.textContent ?? ''
       navigator.clipboard.writeText(code)
-      copy.textContent = 'Copiato'
+      copy.textContent = 'Copied'
       copy.classList.add('done')
       setTimeout(() => {
-        copy.textContent = 'Copia'
+        copy.textContent = 'Copy'
         copy.classList.remove('done')
       }, 1400)
       return

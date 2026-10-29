@@ -90,7 +90,7 @@ export function QuickOpen({ root, recent, openTabs, onPick, onClose }: Props) {
           <input
             autoFocus
             value={query}
-            placeholder="Cerca un file Markdown in tutto il Mac…"
+            placeholder="Search Markdown files across your Mac…"
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={(e) => {
               if (e.key === 'ArrowDown') {
@@ -121,13 +121,13 @@ export function QuickOpen({ root, recent, openTabs, onPick, onClose }: Props) {
               <span className="qo-dir">{tildify(dirname(r.path))}</span>
             </button>
           ))}
-          {!results.length && <div className="tree-note">{query ? 'Nessun file trovato' : 'Digita per cercare'}</div>}
+          {!results.length && <div className="tree-note">{query ? 'No files found' : 'Type to search'}</div>}
         </div>
         <div className="qo-foot">
-          <span><kbd>↑</kbd><kbd>↓</kbd> naviga</span>
-          <span><kbd>↩</kbd> apri</span>
-          <span><kbd>⌘</kbd><kbd>↩</kbd> nuova tab</span>
-          <span><kbd>esc</kbd> chiudi</span>
+          <span><kbd>↑</kbd><kbd>↓</kbd> navigate</span>
+          <span><kbd>↩</kbd> open</span>
+          <span><kbd>⌘</kbd><kbd>↩</kbd> new tab</span>
+          <span><kbd>esc</kbd> close</span>
         </div>
       </div>
     </div>

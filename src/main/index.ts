@@ -257,10 +257,10 @@ function registerIpc() {
   ipcMain.handle('app:info', () => ({
     home: HOME,
     locations: [
-      { id: 'home', label: 'Inizio', path: HOME },
-      { id: 'desktop', label: 'Scrivania', path: join(HOME, 'Desktop') },
-      { id: 'documents', label: 'Documenti', path: join(HOME, 'Documents') },
-      { id: 'downloads', label: 'Download', path: join(HOME, 'Downloads') },
+      { id: 'home', label: 'Home', path: HOME },
+      { id: 'desktop', label: 'Desktop', path: join(HOME, 'Desktop') },
+      { id: 'documents', label: 'Documents', path: join(HOME, 'Documents') },
+      { id: 'downloads', label: 'Downloads', path: join(HOME, 'Downloads') },
       ...(existsSync(ICLOUD) ? [{ id: 'icloud', label: 'iCloud Drive', path: ICLOUD }] : [])
     ],
     pendingOpen: pendingOpen.splice(0)
@@ -295,13 +295,13 @@ function registerIpc() {
   })
   ipcMain.handle('fs:rename', async (_e, from: string, newName: string) => {
     const to = join(dirname(from), newName)
-    if (to !== from && existsSync(to)) throw new Error(`Esiste già "${newName}"`)
+    if (to !== from && existsSync(to)) throw new Error(`"${newName}" already exists`)
     await fsp.rename(from, to)
     return to
   })
   ipcMain.handle('fs:move', async (_e, from: string, toDir: string) => {
     const to = join(toDir, basename(from))
-    if (existsSync(to)) throw new Error(`Esiste già "${basename(from)}" in quella cartella`)
+    if (existsSync(to)) throw new Error(`"${basename(from)}" already exists in that folder`)
     await fsp.rename(from, to)
     return to
   })
@@ -379,63 +379,63 @@ function buildMenu() {
     {
       label: 'File',
       submenu: [
-        { label: 'Nuova nota', accelerator: 'CmdOrCtrl+N', click: send('new-note') },
-        { label: 'Nuova tab', accelerator: 'CmdOrCtrl+T', click: send('new-tab') },
+        { label: 'New Note', accelerator: 'CmdOrCtrl+N', click: send('new-note') },
+        { label: 'New Tab', accelerator: 'CmdOrCtrl+T', click: send('new-tab') },
         { type: 'separator' },
-        { label: 'Apri file…', accelerator: 'CmdOrCtrl+O', click: send('open-file') },
-        { label: 'Apri cartella…', accelerator: 'CmdOrCtrl+Shift+O', click: send('open-folder') },
-        { label: 'Apertura rapida…', accelerator: 'CmdOrCtrl+P', click: send('quick-open') },
+        { label: 'Open File…', accelerator: 'CmdOrCtrl+O', click: send('open-file') },
+        { label: 'Open Folder…', accelerator: 'CmdOrCtrl+Shift+O', click: send('open-folder') },
+        { label: 'Quick Open…', accelerator: 'CmdOrCtrl+P', click: send('quick-open') },
         { type: 'separator' },
-        { label: 'Salva', accelerator: 'CmdOrCtrl+S', click: send('save') },
-        { label: 'Salva con nome…', accelerator: 'CmdOrCtrl+Shift+S', click: send('save-as') },
-        { label: 'Mostra nel Finder', accelerator: 'CmdOrCtrl+Alt+R', click: send('reveal') },
+        { label: 'Save', accelerator: 'CmdOrCtrl+S', click: send('save') },
+        { label: 'Save As…', accelerator: 'CmdOrCtrl+Shift+S', click: send('save-as') },
+        { label: 'Reveal in Finder', accelerator: 'CmdOrCtrl+Alt+R', click: send('reveal') },
         { type: 'separator' },
-        { label: 'Chiudi tab', accelerator: 'CmdOrCtrl+W', click: send('close-tab') },
-        { label: 'Riapri tab chiusa', accelerator: 'CmdOrCtrl+Shift+T', click: send('reopen-tab') }
+        { label: 'Close Tab', accelerator: 'CmdOrCtrl+W', click: send('close-tab') },
+        { label: 'Reopen Closed Tab', accelerator: 'CmdOrCtrl+Shift+T', click: send('reopen-tab') }
       ]
     },
     {
-      label: 'Modifica',
+      label: 'Edit',
       submenu: [
-        { role: 'undo', label: 'Annulla' },
-        { role: 'redo', label: 'Ripeti' },
+        { role: 'undo', label: 'Undo' },
+        { role: 'redo', label: 'Redo' },
         { type: 'separator' },
-        { role: 'cut', label: 'Taglia' },
-        { role: 'copy', label: 'Copia' },
-        { role: 'paste', label: 'Incolla' },
-        { role: 'selectAll', label: 'Seleziona tutto' },
+        { role: 'cut', label: 'Cut' },
+        { role: 'copy', label: 'Copy' },
+        { role: 'paste', label: 'Paste' },
+        { role: 'selectAll', label: 'Select All' },
         { type: 'separator' },
-        { label: 'Trova nel documento', accelerator: 'CmdOrCtrl+F', click: send('find') },
-        { label: 'Cerca nei file', accelerator: 'CmdOrCtrl+Shift+F', click: send('search') }
+        { label: 'Find in Document', accelerator: 'CmdOrCtrl+F', click: send('find') },
+        { label: 'Search in Files', accelerator: 'CmdOrCtrl+Shift+F', click: send('search') }
       ]
     },
     {
-      label: 'Vista',
+      label: 'View',
       submenu: [
-        { label: 'Lettura / Modifica', accelerator: 'CmdOrCtrl+E', click: send('toggle-mode') },
-        { label: 'Barra laterale', accelerator: 'CmdOrCtrl+\\', click: send('toggle-sidebar') },
-        { label: 'Indice del documento', accelerator: 'CmdOrCtrl+Shift+\\', click: send('toggle-outline') },
+        { label: 'Toggle Read / Edit', accelerator: 'CmdOrCtrl+E', click: send('toggle-mode') },
+        { label: 'Toggle Sidebar', accelerator: 'CmdOrCtrl+\\', click: send('toggle-sidebar') },
+        { label: 'Toggle Outline', accelerator: 'CmdOrCtrl+Shift+\\', click: send('toggle-outline') },
         { type: 'separator' },
-        { label: 'Ingrandisci testo', accelerator: 'CmdOrCtrl+=', click: send('font-up') },
-        { label: 'Riduci testo', accelerator: 'CmdOrCtrl+-', click: send('font-down') },
-        { label: 'Dimensione predefinita', accelerator: 'CmdOrCtrl+0', click: send('font-reset') },
+        { label: 'Larger Text', accelerator: 'CmdOrCtrl+=', click: send('font-up') },
+        { label: 'Smaller Text', accelerator: 'CmdOrCtrl+-', click: send('font-down') },
+        { label: 'Default Text Size', accelerator: 'CmdOrCtrl+0', click: send('font-reset') },
         { type: 'separator' },
-        { label: 'Indietro', accelerator: 'CmdOrCtrl+[', click: send('back') },
-        { label: 'Avanti', accelerator: 'CmdOrCtrl+]', click: send('forward') },
+        { label: 'Back', accelerator: 'CmdOrCtrl+[', click: send('back') },
+        { label: 'Forward', accelerator: 'CmdOrCtrl+]', click: send('forward') },
         { type: 'separator' },
-        { role: 'togglefullscreen', label: 'Schermo intero' },
+        { role: 'togglefullscreen', label: 'Toggle Full Screen' },
         ...(app.isPackaged ? [] : [{ role: 'toggleDevTools' as const }])
       ]
     },
     {
-      label: 'Finestra',
+      label: 'Window',
       submenu: [
-        { label: 'Tab successiva', accelerator: 'Ctrl+Tab', click: send('next-tab') },
-        { label: 'Tab precedente', accelerator: 'Ctrl+Shift+Tab', click: send('prev-tab') },
+        { label: 'Next Tab', accelerator: 'Ctrl+Tab', click: send('next-tab') },
+        { label: 'Previous Tab', accelerator: 'Ctrl+Shift+Tab', click: send('prev-tab') },
         { type: 'separator' },
-        { role: 'minimize', label: 'Contrai' },
-        { role: 'zoom', label: 'Ridimensiona' },
-        { role: 'close', label: 'Chiudi finestra', accelerator: 'CmdOrCtrl+Shift+W' }
+        { role: 'minimize', label: 'Minimize' },
+        { role: 'zoom', label: 'Zoom' },
+        { role: 'close', label: 'Close Window', accelerator: 'CmdOrCtrl+Shift+W' }
       ]
     }
   ]

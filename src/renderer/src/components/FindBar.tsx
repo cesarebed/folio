@@ -65,21 +65,21 @@ export function FindBar({ scope, onClose }: Props) {
       <input
         ref={inputRef}
         value={query}
-        placeholder="Trova nel documento"
+        placeholder="Find in document"
         onChange={(e) => setQuery(e.target.value)}
         onKeyDown={(e) => {
           if (e.key === 'Enter') step(e.shiftKey ? -1 : 1)
           if (e.key === 'Escape') onClose()
         }}
       />
-      <span className="find-count">{query ? (count ? `${index + 1} di ${count}` : 'Nessun risultato') : ''}</span>
-      <button className="icon-btn" onClick={() => step(-1)} title="Precedente (⇧↩)">
+      <span className="find-count">{query ? (count ? `${index + 1} of ${count}` : 'No results') : ''}</span>
+      <button className="icon-btn" onClick={() => step(-1)} title="Previous (⇧↩)">
         <CaretUp size={14} weight="bold" />
       </button>
-      <button className="icon-btn" onClick={() => step(1)} title="Successivo (↩)">
+      <button className="icon-btn" onClick={() => step(1)} title="Next (↩)">
         <CaretDown size={14} weight="bold" />
       </button>
-      <button className="icon-btn" onClick={onClose} title="Chiudi (Esc)">
+      <button className="icon-btn" onClick={onClose} title="Close (Esc)">
         <X size={14} weight="bold" />
       </button>
     </div>

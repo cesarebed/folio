@@ -1,7 +1,7 @@
 {
   "name": "folio",
   "productName": "Folio",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Lettore ed editor Markdown per macOS, con albero delle cartelle e tab multiple",
   "author": "cesarebed",
   "license": "MIT",
@@ -43,9 +43,9 @@
       "identity": null,
       "darkModeSupport": true,
       "extendInfo": {
-        "NSDesktopFolderUsageDescription": "Folio legge e salva i file Markdown sulla Scrivania.",
-        "NSDocumentsFolderUsageDescription": "Folio legge e salva i file Markdown nei Documenti.",
-        "NSDownloadsFolderUsageDescription": "Folio legge e salva i file Markdown nei Download."
+        "NSDesktopFolderUsageDescription": "Folio reads and saves Markdown files on your Desktop.",
+        "NSDocumentsFolderUsageDescription": "Folio reads and saves Markdown files in your Documents folder.",
+        "NSDownloadsFolderUsageDescription": "Folio reads and saves Markdown files in your Downloads folder."
       }
     },
     "fileAssociations": [
@@ -70,6 +70,9 @@
         "rank": "Alternate",
         "isPackage": true
       }
+    ],
+    "electronLanguages": [
+      "en"
     ]
   },
   "devDependencies": {

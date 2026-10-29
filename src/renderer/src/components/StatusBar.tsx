@@ -11,13 +11,13 @@ export function StatusBar({ tab }: { tab: Tab }) {
   }, [tab.content])
 
   const dirty = tab.content !== tab.saved
-  const state = tab.saving ? 'Salvataggio…' : dirty ? 'Modifiche non salvate' : 'Salvato'
+  const state = tab.saving ? 'Saving…' : dirty ? 'Unsaved changes' : 'Saved'
 
   return (
     <footer className="statusbar">
-      <span>{stats.words.toLocaleString('it-IT')} parole</span>
-      <span>{stats.chars.toLocaleString('it-IT')} caratteri</span>
-      <span>{stats.minutes} min di lettura</span>
+      <span>{stats.words.toLocaleString('en-US')} words</span>
+      <span>{stats.chars.toLocaleString('en-US')} characters</span>
+      <span>{stats.minutes} min read</span>
       <span className="spacer" />
       <span className={`save-state${dirty ? ' dirty' : ''}`}>{state}</span>
     </footer>

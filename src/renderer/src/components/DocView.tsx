@@ -127,10 +127,10 @@ export const DocView = forwardRef<DocHandle, Props>(function DocView(props, ref)
     <section className="doc">
       <header className="doc-header">
         <div className="doc-nav">
-          <button className="icon-btn" disabled={!tab.back.length} onClick={props.onBack} title="Indietro (⌘[)">
+          <button className="icon-btn" disabled={!tab.back.length} onClick={props.onBack} title="Back (⌘[)">
             <ArrowLeft size={15} weight="bold" />
           </button>
-          <button className="icon-btn" disabled={!tab.fwd.length} onClick={props.onForward} title="Avanti (⌘])">
+          <button className="icon-btn" disabled={!tab.fwd.length} onClick={props.onForward} title="Forward (⌘])">
             <ArrowRight size={15} weight="bold" />
           </button>
         </div>
@@ -147,19 +147,19 @@ export const DocView = forwardRef<DocHandle, Props>(function DocView(props, ref)
         </nav>
         <div className="doc-actions">
           <div className="segmented" role="tablist">
-            <button className={readMode ? 'on' : ''} onClick={() => !readMode && props.onToggleMode()} title="Lettura (⌘E)">
+            <button className={readMode ? 'on' : ''} onClick={() => !readMode && props.onToggleMode()} title="Read (⌘E)">
               <BookOpenText size={14} weight="bold" />
-              Lettura
+              Read
             </button>
-            <button className={!readMode ? 'on' : ''} onClick={() => readMode && props.onToggleMode()} title="Modifica (⌘E)">
+            <button className={!readMode ? 'on' : ''} onClick={() => readMode && props.onToggleMode()} title="Edit (⌘E)">
               <PencilSimpleLine size={14} weight="bold" />
-              Modifica
+              Edit
             </button>
           </div>
           <button
             className={`icon-btn${props.outlineOpen ? ' on' : ''}`}
             onClick={props.onToggleOutline}
-            title="Indice del documento (⌘⇧\)"
+            title="Outline (⌘⇧\)"
           >
             <ListBullets size={16} weight="bold" />
           </button>
@@ -169,7 +169,7 @@ export const DocView = forwardRef<DocHandle, Props>(function DocView(props, ref)
       {findOpen && readMode && <FindBar scope={() => readerRef.current?.element() ?? null} onClose={() => setFindOpen(false)} />}
 
       <div className="doc-scroll" ref={scrollRef} onScroll={onScroll}>
-        {tab.status === 'loading' && <div className="doc-state">Apertura…</div>}
+        {tab.status === 'loading' && <div className="doc-state">Opening…</div>}
         {tab.status === 'error' && (
           <div className="doc-state error">
             <strong>{tab.error}</strong>

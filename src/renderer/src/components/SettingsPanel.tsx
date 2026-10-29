@@ -36,17 +36,17 @@ export function SettingsPanel({ settings, patchSettings, onClose }: Props) {
 
   return (
     <div className="settings" ref={ref}>
-      <label>Tema</label>
+      <label>Theme</label>
       <Choice
         value={settings.theme}
         options={[
-          ['system', 'Sistema'],
-          ['light', 'Chiaro'],
-          ['dark', 'Scuro']
+          ['system', 'System'],
+          ['light', 'Light'],
+          ['dark', 'Dark']
         ]}
         onChange={(theme) => patchSettings({ theme })}
       />
-      <label>Carattere di lettura</label>
+      <label>Reading font</label>
       <Choice
         value={settings.readerFont}
         options={[
@@ -65,28 +65,28 @@ export function SettingsPanel({ settings, patchSettings, onClose }: Props) {
         value={settings.fontSize}
         onChange={(e) => patchSettings({ fontSize: Number(e.target.value) })}
       />
-      <label>Larghezza pagina</label>
+      <label>Page width</label>
       <Choice
         value={settings.width}
         options={[
-          ['narrow', 'Stretta'],
-          ['wide', 'Ampia'],
-          ['full', 'Piena']
+          ['narrow', 'Narrow'],
+          ['wide', 'Wide'],
+          ['full', 'Full']
         ]}
         onChange={(width) => patchSettings({ width })}
       />
-      <label>Apri i file in</label>
+      <label>Open files in</label>
       <Choice
         value={settings.defaultMode}
         options={[
-          ['read', 'Lettura'],
-          ['edit', 'Modifica']
+          ['read', 'Read'],
+          ['edit', 'Edit']
         ]}
         onChange={(defaultMode) => patchSettings({ defaultMode })}
       />
       <label className="check">
         <input type="checkbox" checked={settings.showHidden} onChange={(e) => patchSettings({ showHidden: e.target.checked })} />
-        Mostra file e cartelle nascosti
+        Show hidden files and folders
       </label>
     </div>
   )

@@ -8,5 +8,5 @@ for (const dir of readdirSync(release).filter((d) => d.startsWith('mac'))) {
   const app = join(release, dir, 'Folio.app')
   if (!existsSync(app)) continue
   execFileSync('codesign', ['--force', '--deep', '--sign', '-', app], { stdio: 'inherit' })
-  console.log(`firmata (ad-hoc): ${app}`)
+  console.log(`signed (ad-hoc): ${app}`)
 }

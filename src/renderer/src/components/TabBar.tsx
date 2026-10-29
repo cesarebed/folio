@@ -21,11 +21,11 @@ export function TabBar(props: Props) {
   const menu = async (e: React.MouseEvent, tab: Tab) => {
     e.preventDefault()
     const choice = await window.api.popupMenu([
-      { id: 'close', label: 'Chiudi tab' },
-      { id: 'others', label: 'Chiudi le altre tab', enabled: props.tabs.length > 1 },
+      { id: 'close', label: 'Close Tab' },
+      { id: 'others', label: 'Close Other Tabs', enabled: props.tabs.length > 1 },
       { type: 'separator' },
-      { id: 'reveal', label: 'Mostra nel Finder', enabled: !!tab.path },
-      { id: 'copy', label: 'Copia percorso', enabled: !!tab.path }
+      { id: 'reveal', label: 'Reveal in Finder', enabled: !!tab.path },
+      { id: 'copy', label: 'Copy Path', enabled: !!tab.path }
     ])
     if (choice === 'close') props.onClose(tab.id)
     if (choice === 'others') props.onCloseOthers(tab.id)
@@ -35,13 +35,13 @@ export function TabBar(props: Props) {
 
   return (
     <div className={`tabbar${props.sidebarOpen ? '' : ' inset'}`} onDoubleClick={(e) => e.target === e.currentTarget && props.onNew()}>
-      <button className="icon-btn sidebar-toggle" onClick={props.onToggleSidebar} title="Barra laterale (⌘\)">
+      <button className="icon-btn sidebar-toggle" onClick={props.onToggleSidebar} title="Sidebar (⌘\)">
         <SidebarSimple size={16} weight="bold" />
       </button>
       <div className="tabs" onDoubleClick={(e) => e.target === e.currentTarget && props.onNew()}>
         {props.tabs.map((t) => {
           const dirty = t.content !== t.saved
-          const title = t.path ? stem(t.path) || basename(t.path) : 'Nuova tab'
+          const title = t.path ? stem(t.path) || basename(t.path) : 'New Tab'
           return (
             <div
               key={t.id}
@@ -73,7 +73,7 @@ export function TabBar(props: Props) {
                 className={`tab-close${dirty ? ' dirty' : ''}`}
                 onMouseDown={(e) => e.stopPropagation()}
                 onClick={() => props.onClose(t.id)}
-                title="Chiudi (⌘W)"
+                title="Close (⌘W)"
               >
                 <X size={11} weight="bold" className="x" />
                 <span className="dot" />
@@ -81,7 +81,7 @@ export function TabBar(props: Props) {
             </div>
           )
         })}
-        <button className="icon-btn new-tab" onClick={props.onNew} title="Nuova tab (⌘T)">
+        <button className="icon-btn new-tab" onClick={props.onNew} title="New tab (⌘T)">
           <Plus size={14} weight="bold" />
         </button>
       </div>

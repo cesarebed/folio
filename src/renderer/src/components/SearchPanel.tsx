@@ -59,7 +59,7 @@ export function SearchPanel({ root, focusToken, onOpen }: Props) {
         <input
           ref={inputRef}
           value={query}
-          placeholder="Cerca nei file…"
+          placeholder="Search in files…"
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={(e) => e.key === 'Escape' && setQuery('')}
         />
@@ -69,7 +69,7 @@ export function SearchPanel({ root, focusToken, onOpen }: Props) {
         {busy && <span className="spinner" />}
       </div>
       <div className="search-results">
-        {results && !results.length && !busy && <div className="tree-note">Nessun risultato</div>}
+        {results && !results.length && !busy && <div className="tree-note">No results</div>}
         {results?.map((hit) => (
           <div key={hit.path} className="hit">
             <button className="hit-file" onClick={(e) => onOpen(hit.path, e.metaKey)} title={hit.path}>

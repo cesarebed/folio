@@ -67,7 +67,7 @@ export default function App() {
         updateTab(id, { saved: content, saving: false })
       } catch (e) {
         updateTab(id, { saving: false })
-        notify(`Impossibile salvare: ${(e as Error).message}`)
+        notify(`Could not save: ${(e as Error).message}`)
       }
     },
     [updateTab, notify]
@@ -117,7 +117,7 @@ export default function App() {
         const msg = String((e as Error).message ?? e)
         updateTab(id, (t) =>
           t.path === path
-            ? { status: 'error', realPath: null, content: '', saved: '', error: /ENOENT/.test(msg) ? 'File non trovato' : /EPERM|EACCES/.test(msg) ? 'Accesso negato' : msg }
+            ? { status: 'error', realPath: null, content: '', saved: '', error: /ENOENT/.test(msg) ? 'File not found' : /EPERM|EACCES/.test(msg) ? 'Permission denied' : msg }
             : {}
         )
       }
@@ -272,7 +272,7 @@ export default function App() {
         await api.trash(p)
         for (const t of tabsRef.current.filter((t) => t.path && isUnder(t.path, p))) closeTab(t.id, false)
         tree.reload(dirname(p))
-        notify(`"${basename(p)}" spostato nel Cestino`)
+        notify(`"${basename(p)}" moved to Trash`)
       } catch (e) {
         notify((e as Error).message)
       }
@@ -288,7 +288,7 @@ export default function App() {
   }, [selectedDir])
 
   const newNote = useCallback(
-    async (dir?: string, base = 'Senza titolo') => {
+    async (dir?: string, base = 'Untitled') => {
       const d = dir ?? targetDir()
       try {
         const p = await api.createFile(d, base)
@@ -297,7 +297,7 @@ export default function App() {
           patchSettings((s) => ({ expanded: s.expanded.includes(d) ? s.expanded : [...s.expanded, d] }))
         openFile(p, { mode: 'edit', focusTitle: true })
       } catch (e) {
-        notify(`Impossibile creare la nota: ${(e as Error).message}`)
+        notify(`Could not create the note: ${(e as Error).message}`)
       }
     },
     [targetDir, tree, openFile, patchSettings, notify]
@@ -306,7 +306,7 @@ export default function App() {
   const newFolder = useCallback(
     async (dir: string) => {
       try {
-        const p = await api.createFolder(dir, 'Nuova cartella')
+        const p = await api.createFolder(dir, 'New Folder')
         tree.reload(dir)
         patchSettings((s) => ({ expanded: [...s.expanded.filter((x) => x !== dir), dir] }))
         return p
